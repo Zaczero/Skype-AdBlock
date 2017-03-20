@@ -86,6 +86,7 @@ namespace Skype_AdBlock
             foreach (var process in skypeProcesses)
             {
                 process.Kill();
+                process.WaitForExit();
             }
         }
 
