@@ -56,9 +56,10 @@ namespace Skype_AdBlock
             // Block ad placeholder
             foreach (var configPath in GetConfigPaths())
             {
+                var oldAttributes = File.GetAttributes(configPath);
                 File.SetAttributes(configPath, FileAttributes.Normal);
                 File.WriteAllText(configPath, File.ReadAllText(configPath).Replace("<AdvertPlaceholder>1</AdvertPlaceholder>", "<AdvertPlaceholder>0</AdvertPlaceholder>"));
-                File.SetAttributes(configPath, FileAttributes.ReadOnly);
+                File.SetAttributes(configPath, oldAttributes);
             }
         }
 
@@ -74,9 +75,10 @@ namespace Skype_AdBlock
             // Restore ad placeholder
             foreach (var configPath in GetConfigPaths())
             {
+                var oldAttributes = File.GetAttributes(configPath);
                 File.SetAttributes(configPath, FileAttributes.Normal);
                 File.WriteAllText(configPath, File.ReadAllText(configPath).Replace("<AdvertPlaceholder>0</AdvertPlaceholder>", "<AdvertPlaceholder>1</AdvertPlaceholder>"));
-                File.SetAttributes(configPath, FileAttributes.ReadOnly);
+                File.SetAttributes(configPath, oldAttributes);
             }
         }
 
